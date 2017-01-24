@@ -1,4 +1,8 @@
-
+/*
+	Created by: Jonathan Chac
+	University of Washington
+	TCES 420 Assignment 3
+*/
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -23,11 +27,11 @@ struct job {
 	int nr_phases;
 	int jobTime;
     int current_phase;
-	// Phase types: 1 = CPU phase; 2 = IO phase
+
 	int phasetype_and_duration[NR_PHASES][NR_PHASES];
 	int is_completed;
 }; 
-// A linked list (LL) node to store a queue entry
+
 struct QNode
 {
     struct job *currentJob;
@@ -100,7 +104,6 @@ struct QNode *deQueue(struct Queue *q)
 struct Queue* cpuQ;
 struct Queue* ioQ;
 struct Queue* fQ;
-// Driver Program to test anove functions
 
 void *JobCreation()
 {
@@ -144,6 +147,7 @@ void *JobCreation()
 		}
 	}
 }
+// CPU process checks the phase and puts into correct queue.
 void *CpuProcess(){
 	printf("COU init");
 	while(NR_JOBS<MaxJobs){
@@ -206,7 +210,6 @@ int main()
 	pthread_mutex_init (&mutex1,NULL);
 	pthread_mutex_init (&mutex2,NULL);
 	int i;
-	//struct job* test = createJob();
 	cpuQ = createQueue();
 	ioQ = createQueue();
 	fQ = createQueue();
@@ -215,10 +218,6 @@ int main()
 	ioQ->size = 0;
 	fQ->size = 0;	
 
-	/*enQueue(&cpuQ,test);
-	deQueue(&cpuQ);
-	JobCreation();*/
-	//enQueue(cpuQ,test);
     pthread_t t[16];
 
 	
@@ -235,34 +234,6 @@ int main()
     for (i = 0; i < 16; i++){
         pthread_join(t[i], NULL);
     }
-	/*pthread_t CThreads[CpuThreads];
-	pthread_t IOThread[IOThreads];
-	pthread_t JThread[SThreads];
-	for(i=0;i<CpuThreads;i++){
-		pthread_create(&CThreads[i],NULL,CpuProcess,NULL);
-	}
-	for(i=0;i<IOThreads;i++){
-		pthread_create(&IOThread[i],NULL,IOProcess,NULL);
-	}
-	for(i=0;i<SThreads;i++){
-		pthread_create(&JThread[i],NULL,JobCreation,NULL);
-	}
-	for(i=0;i<CpuThreads;i++){
-		pthread_join(CThreads[i],NULL);
-	}
-	for(i=0;i<IOThreads;i++){
-		pthread_join(IOThread[i],NULL);
-	}
-	for(i=0;i<SThreads;i++){
-		pthread_join(JThread[i],NULL);
-	}
-	int test = cpuQ->size;
-	printf("%d",test);*/
-	/*for(i=0;i<NR_JOBS;i++){
-		struct QNode* temp = deQueue(cpuQ);
-		printf(" test %d \n", temp->currentJob->job_id );
-		
-	}
-	*/	
+	
     return 0;
 }
