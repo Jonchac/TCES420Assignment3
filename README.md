@@ -1,6 +1,9 @@
 # TCES420Assignment3
 Project I worked on during my class in TCES 420. Multiple Queues to simulate a 16 thread scheduler.
 TCES 420, Fall 2016 -- Project #3
+
+
+
 The objective of this project is to gain experience constructing, running,
 and debugging parallel, multi-threaded programs using pthreads as well
 as gain some experience with simple, centralized schedulers. You will
